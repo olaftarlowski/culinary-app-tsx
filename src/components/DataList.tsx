@@ -1,14 +1,13 @@
-
 interface Props {
-    data: any
+  data: any;
 }
 
-const DataList = ({ data }: Props) => {
-    console.log("DATA Z DATALIST",data);
-    return (
-      <div>
-        <h2>DataList</h2>
-        {/* <div>
+const DataList: React.FC<Props> = ({ data }) => {
+  console.log("DATA Z DATALIST", data);
+  return (
+    <div>
+      <h2>DataList</h2>
+      {/* <div>
           {data.map((item) => {
             return (
               <div
@@ -37,11 +36,11 @@ const DataList = ({ data }: Props) => {
             );
           })}
         </div> */}
-      </div>
-    );
-  };
-  
-  export default DataList;
+    </div>
+  );
+};
+
+export default DataList;
 
 // import React from 'react'
 

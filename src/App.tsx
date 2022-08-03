@@ -7,14 +7,14 @@ import { DataList, TextField } from "./components/";
 import Counter from "./components/Counter";
 
 const App = () => {
-  const [airtableData, setAirtableData] = useState<AxiosResponse | null | void>(
+  const [airtableData, setAirtableData] = useState<AxiosResponse | null>(
     null
   );
 
   const [someVal, setSomeVal] = useState<string>("");
 
   const getDataHandler = () => {
-    api.getData().then((data) => setAirtableData(data));
+    api.getData().then((data) => setAirtableData(data.records));
   };
 
   useEffect(() => {

@@ -1,33 +1,7 @@
-// import axios from "axios";
-
-// const API_KEY = `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`;
-// const API_URL = "https://api.airtable.com/v0/app4Fn5LIMlVBvrA3";
-
-// const getData = async () => {
-//   axios.defaults.headers = {
-//     "Content-Type": "application/json",
-//     Authorization: API_KEY,
-//   };
-
-//   const res = await axios.get(`${API_URL}/recipes`).catch((error) => {
-//     console.log(error);
-//   });
-
-//   return res.data;
-// };
-
-// const postData = () => {
-//   console.log("red");
-// };
-
-// const apiRequest = { getData, postData };
-
-// export default apiRequest;
-
 import axios from 'axios';
 
 
-type Fields = {
+export interface Fields {
     TAKIJEDEN: Array<string>,
     selekty: Array<string>,
     Name: string,
@@ -36,38 +10,24 @@ type Fields = {
     qwerty: Array<string>,
 }
 
-type Records = {
+export interface Records {
     id: string;
     createdTime: string;
-    fields: Fields[];
+    fields: Fields;
 };
 
-type GetUsersResponse = {
+interface GetDataResponse {
     records: Records[];
 };
 
-const API_KEY = `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`;
-const API_URL = "https://api.airtable.com/v0/app4Fn5LIMlVBvrA3";
+const API_KEY: string = `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`;
+const API_URL: string = "https://api.airtable.com/v0/app4Fn5LIMlVBvrA3";
 
 const getData = async () => {
-    //   axios.defaults.headers = {
-    //     "Content-Type": "application/json",
-    //     Accept: 'application/json',
-    //     Authorization: API_KEY,
-    //   };
-    // axios.defaults.headers = {
-
-    // }
-
-    // let config = {
-    //     headers: {
-    //         Authorization: API_KEY,
-    //     }
-    //   }
 
     axios.defaults.headers.common['Authorization'] = API_KEY;
 
-    const res = await axios.get<GetUsersResponse, any>(`${API_URL}/recipes`).catch((error) => {
+    const res = await axios.get<GetDataResponse, any>(`${API_URL}/recipes`).catch((error) => {
         console.log(error);
     });
 

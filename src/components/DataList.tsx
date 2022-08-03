@@ -1,4 +1,4 @@
-type Fields = {
+interface Fields {
   TAKIJEDEN: Array<string>,
   selekty: Array<string>,
   Name: string,
@@ -10,29 +10,23 @@ type Fields = {
 interface Record {
   id: string;
   createdTime: string;
-  fields: any;
+  fields: Fields;
 }
 
-// interface Props {
-//   data: Record[];
-// }
-
 interface Props {
-  data: any;
+  data: Array<Record>;
 }
 
 const DataList: React.FC<Props> = ({ data }) => {
-  console.log("DATA Z DATALIST", data);
-  const check = () => {
+  // console.log("DATA from DATALIST", data);
+  const checkDataFromProps = () => {
     console.log(data)
   }
+
   return (
     <div>
       <h2>DataList</h2>
-      <button onClick={check}>DATA LIST CHECK</button>
-      {/* {data && data.map((el: Record) => {
-        return <div key={el.id}>{el.id}</div>
-      })} */}
+      <button onClick={checkDataFromProps}>DATA LIST CHECK</button>
       <div>
         {data && data.map((item: Record) => {
           return (
@@ -44,17 +38,17 @@ const DataList: React.FC<Props> = ({ data }) => {
               <div>{item.fields.Notes}</div>
               <div>{item.fields.Status}</div>
               <div style={{ border: "1px solid yellow", margin: 12 }}>
-                {item.fields["TAKIJEDEN"].map((el: string) => {
+                {item.fields["TAKIJEDEN"].map((el) => {
                   return <div key={el}>{el}</div>;
                 })}
               </div>
               <div style={{ border: "1px solid green", margin: 12 }}>
-                {item.fields.qwerty.map((el: string) => {
+                {item.fields.qwerty.map((el) => {
                   return <div key={el}>{el}</div>;
                 })}
               </div>
               <div style={{ border: "1px solid blue", margin: 12 }}>
-                {item.fields.selekty.map((el: string) => {
+                {item.fields.selekty.map((el) => {
                   return <div key={el}>{el}</div>;
                 })}
               </div>
@@ -67,13 +61,3 @@ const DataList: React.FC<Props> = ({ data }) => {
 };
 
 export default DataList;
-
-// import React from 'react'
-
-// const DataList = () => {
-//   return (
-//     <div>DataList</div>
-//   )
-// }
-
-// export default DataList

@@ -1,17 +1,13 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { default as api } from "./services/api";
-import { AxiosResponse } from "axios";
+import { default as api, Records } from "./services/api";
+// import { AxiosResponse } from "axios";
+import { DataList } from "./components/";
 import "./App.css";
-import { DataList, TextField } from "./components/";
-import Counter from "./components/Counter";
+
 
 const App = () => {
-  const [airtableData, setAirtableData] = useState<AxiosResponse | null>(
-    null
-  );
-
-  const [someVal, setSomeVal] = useState<string>("");
+  const [airtableData, setAirtableData] = useState<Array<Records>>([]);
 
   const getDataHandler = () => {
     api.getData().then((data) => setAirtableData(data.records));
@@ -21,29 +17,15 @@ const App = () => {
     getDataHandler();
   }, []);
 
-  const asd = () => {
+  const checkAirtableData = () => {
     console.log(airtableData);
-  };
-
-  const getVal = () => {
-    console.log("red");
   };
 
   return (
     <Router>
       <div className="App">
         <h2>App component</h2>
-        <button onClick={asd}>lik</button>
-        <p>VAL ON CHANGE: {someVal}</p>
-        <Counter text="asd" />
-        <TextField
-          handleChange={(e) => setSomeVal(e.target.value)}
-          somePerson={{ firstName: "andrzej", lastName: "kopyto" }}
-          someText={"jakis telst"}
-          ok={true}
-          num={4}
-          newFnc={getVal}
-        />
+        <button onClick={checkAirtableData}>check</button>
         <div>
           <Routes>
             <Route path="/" element={<DataList data={airtableData} />} />
